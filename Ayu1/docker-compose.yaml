@@ -1,0 +1,28 @@
+###############-VERSION-###################
+version: '3.7'
+
+################-SERVICIOS-################
+
+services:
+
+###################-CLIENTE-GRPC-#########################   
+  client:
+    container_name: client
+    build: ./backend/client
+    restart: always
+    volumes:
+      - ./backend/client:/client
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+
+###################-SERVIDOR-GRPC-#########################  
+  server:
+    container_name: server
+    build: ./backend/server
+    restart: always
+    volumes:
+      - ./backend/server:/server
+    ports:
+      - "50051:50051"
