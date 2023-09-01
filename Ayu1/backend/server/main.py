@@ -4,8 +4,6 @@ import examples_pb2_grpc
 #from config import database_auth
 from concurrent import futures
 
-
-
 class DataServer(examples_pb2_grpc.Data):
     
     def GetWeatherData(self, request, context):

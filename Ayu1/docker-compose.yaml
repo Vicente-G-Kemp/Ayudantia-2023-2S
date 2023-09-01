@@ -26,3 +26,18 @@ services:
       - ./backend/server:/server
     ports:
       - "50051:50051"
+  
+###################-MEMCACHED-#########################  
+  memcached:
+    container_name: memcached
+    image: bitnami/memcached:latest
+    restart: always
+    ports:
+      - "11211:11211"
+    environment:
+      - MEMCACHED_CACHE_SIZE=128
+      - MEMCACHED_MAX_CONNECTIONS=2000
+      - MEMCACHED_THREADS=4
+      - MEMCACHED_USERNAME=memcached
+      - MEMCACHED_PASSWORD=memcached
+    #command: ["memcached", "-m 64"]
