@@ -3,21 +3,29 @@ import examples_pb2
 import examples_pb2_grpc
 #from config import database_auth
 from concurrent import futures
+# use the file db.json in the same folder
+import json
 
 class DataServer(examples_pb2_grpc.Data):
     
     def GetWeatherData(self, request, context):
         print("GetWeatherData")
-        #extract the more refrehing time of the db
-        #cur.execute("SELECT * FROM weather where date = '"+ str(current_date) +"' order by id desc limit 1")
-        #weather = cur.fetchall()
-        temperature = {
-            "id": 1,
-            "temp": "20.0",
-            "time": "12:00:00",
-            "date": "2020-01-01"
-        }
-        temperature_response = examples_pb2.WeatherResponse(**temperature)
+        # use the file db.json in the same folder
+        
+        f = open('db.json')
+        data = json.load(f)
+        arr = []
+        for i in data['weather']:
+            # introduce the data from the db to the temperature dictionary
+            temperature = {
+                "id": i['id'],
+                "temp": i['temp'],
+                "time": i['time'],
+                "date": i['date']
+            }
+            arr.append(temperature)
+        # put an array into the temperature_response
+        temperature_response = examples_pb2.WeatherResponse(**arr[0])
         return temperature_response
     
     def GetCoinsData(self, request, context):

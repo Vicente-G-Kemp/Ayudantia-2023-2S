@@ -3,8 +3,8 @@ syntax = "proto3";
 package mypackage;
 
 service Data {
-    rpc GetWeatherData(Empty) returns (WeatherResponse);
-    rpc GetCoinsData(Empty) returns (CoinsResponse);
+    rpc GetWeatherData(Empty) returns (WeatherResponse) {};
+    rpc GetCoinsData(Empty) returns (CoinsResponse) {};
 }
 
 message WeatherResponse {
