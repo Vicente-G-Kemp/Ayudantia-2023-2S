@@ -30,16 +30,19 @@ class DataServer(examples_pb2_grpc.Data):
     
     def GetCoinsData(self, request, context):
         print("GetCoinsData")
-        #cur.execute("SELECT * FROM cash where date = '"+ str(current_date) +"' order by id desc limit 1")
-        # coins = cur.fetchall()
-        coins = {
-            "id": 1,
-            "dolar": "800.0",
-            "euro": "900.0",
-            "uf": "10000.0",
-            "time": "12:00:00",
-            "date": "2020-01-01"
-        }
+        
+        f = open('db.json')
+        data = json.load(f)
+        for i in data['coins']:
+            # introduce the data from the db to the coins dictionary
+            coins = {
+                "id": i['id'],
+                "dolar": i['dolar'],
+                "euro": i['euro'],
+                "uf": i['uf'],
+                "time": i['time'],
+                "date": i['date']
+            }
         coins_response = examples_pb2.CoinsResponse(**coins)
         return coins_response
         
