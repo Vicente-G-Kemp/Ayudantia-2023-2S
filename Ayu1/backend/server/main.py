@@ -1,9 +1,8 @@
 import grpc
 import examples_pb2
 import examples_pb2_grpc
-#from config import database_auth
 from concurrent import futures
-# use the file db.json in the same folder
+# lib json to use the file db.json in the same folder
 import json
 
 class DataServer(examples_pb2_grpc.Data):
@@ -49,7 +48,7 @@ class DataServer(examples_pb2_grpc.Data):
 def main():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     examples_pb2_grpc.add_DataServicer_to_server(DataServer(), server)
-    #Exponer a cualquier IP en el puerto 50051
+    #Expose to any IP in port 50051
     server.add_insecure_port('[::]:50051')
     server.start()
     
@@ -58,6 +57,4 @@ def main():
 
 
 if __name__ == '__main__':
-    #conn = database_auth.get_db()
-    #cur = conn.cursor()
     main()
