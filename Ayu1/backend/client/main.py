@@ -63,8 +63,12 @@ def getCoins():
     client = DataClient()
     response = client.GetCoins()
     response = MessageToJson(response)
+    # insert the json response into memcached
+    mc.set('coins', response, time=60)
+    # get the json response from memcached
+    response = mc.get('coins')
+    print("Response from memcached: ",response)
     response = json.loads(response)
-    print(response)
     return jsonify(response)    
 
 if __name__ == '__main__':
