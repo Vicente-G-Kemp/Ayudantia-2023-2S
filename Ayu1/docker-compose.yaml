@@ -14,6 +14,8 @@ services:
       - ./backend/client:/client
     depends_on:
       - server
+    # networks:
+    #   - app-tier
     ports:
       - "3000:3000"
 
@@ -30,14 +32,10 @@ services:
 ###################-MEMCACHED-#########################  
   memcached:
     container_name: memcached
-    image: bitnami/memcached:latest
-    restart: always
+    image: memcached:latest
     ports:
-      - "11211:11211"
-    environment:
-      - MEMCACHED_CACHE_SIZE=128
-      - MEMCACHED_MAX_CONNECTIONS=2000
-      - MEMCACHED_THREADS=4
-      - MEMCACHED_USERNAME=memcached
-      - MEMCACHED_PASSWORD=memcached
-    #command: ["memcached", "-m 64"]
+        - "11211:11211"
+
+networks:
+  app-tier:
+    driver: bridge

@@ -1,9 +1,27 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
 from flask_cors import CORS
 import grpc, json
 from google.protobuf.json_format import MessageToJson
 import examples_pb2
 import examples_pb2_grpc
+import time
+import memcache
+from pymemcache.client import base
+
+# Creating connection with mnemcached
+mc = memcache.Client(['memcached:11211'], debug=0)
+
+# Setting a value
+mc.set('France', 'Paris', time=60)
+
+print(mc.get('France'))
+
+valor = mc.get('France')
+
+if valor is None:
+    print("No hay valor")
+else:
+    print(valor)
 
 app = Flask(__name__)
 CORS(app)
