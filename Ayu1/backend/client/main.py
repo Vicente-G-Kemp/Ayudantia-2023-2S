@@ -68,8 +68,11 @@ def getCoins():
     # get the json response from memcached
     response = mc.get('coins')
     print("Response from memcached: ",response)
+    # make a response with this tring concate in the response "Response from memcached: "
     response = json.loads(response)
-    return jsonify(response)    
+    # in jsonify includes the next parameter "Response from memcached: " 
+    
+    return jsonify("Response from memcached: ",response)   
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=3000, debug=True)
