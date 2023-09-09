@@ -21,3 +21,7 @@ Para borrar cache usar el siguiente comando luego de bajar todos los contenedore
 ```sh
 docker system prune -a
 ```
+Para borrar contenedores a mano sin la necesidad de usar el -v en el comando compose down:
+```sh
+docker volume rm $(docker volume ls -q)
+```
