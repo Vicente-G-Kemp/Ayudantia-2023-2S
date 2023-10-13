@@ -32,7 +32,7 @@ services:
    
   consumer:
     build: ./consumers
-    #container_name: consumer_kafka
+    container_name: consumer_kafka
     deploy: 
       replicas: 5
     depends_on:
