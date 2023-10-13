@@ -29,10 +29,10 @@ services:
       - zookeeper
     volumes:
       - ./producers:/usr/src/app
-   
+
   consumer:
     build: ./consumers
-    container_name: consumer_kafka
+    #container_name: consumer_kafka
     deploy: 
       replicas: 5
     depends_on:

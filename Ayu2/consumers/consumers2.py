@@ -1,18 +1,30 @@
 from kafka import KafkaConsumer
+from itertools import zip_longest
 import random
 
 servidores_bootstrap = 'kafka:9092'
 topics = ['temperatura', 'porcentaje_humedad', 'posicion', 'color', 'peso']
 
-grupo_consumidores = f'grupo_consumidores_{random.choice(topics)}'
+# Creando grupos de consumidores para cada topic
+consumer_groups = [f'grupo_consumidores_{topic}' for topic in topics]
 
-# Configurar el consumidor con el group_id
-consumer = KafkaConsumer(
-    *topics,
-    group_id=grupo_consumidores,
-    bootstrap_servers=[servidores_bootstrap]
-)
+# Creando consumidores para cada grupo
+consumers = [
+    KafkaConsumer(
+        *topics,
+        group_id=group,
+        bootstrap_servers=[servidores_bootstrap]
+    )
+    for group in consumer_groups
+]
 
-# Consumir mensajes de los topics elegidos
-for msg in consumer:
-    print(f"Topic: {msg.topic}, Mensaje: {msg.value}")
+# Partition of topics
+
+
+# Crear un bucle infinito para consumir mensajes de manera alternada de cada consumidor
+while True:
+    for msgs in zip_longest(*consumers):
+        for i, msg in enumerate(msgs):
+            if msg is not None:
+                print(f"Grupo de consumidores: {consumer_groups[i]}\n")
+                print(f"Topic: {msg.topic}, Mensaje: {msg.value}")

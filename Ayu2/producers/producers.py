@@ -20,12 +20,18 @@ def generar_id():
 
 def enviar_temperatura():
     topic = topic_temperatura
+    
     while True:
+        # create temperatures with celcius range
         temperatura = round(random.uniform(10, 30), 1)
+        celsius = temperatura
+        fahrenheit = temperatura * 1.8 + 32
+        # Crear particion de topic mandar celcius y fahrenheit
         mensaje = {
             "timestamp": int(time.time()),
             "id": generar_id(),
-            "temperatura": temperatura
+            "celsius": celsius,
+            "fahrenheit": fahrenheit
         }
         json_mensaje = dumps(mensaje).encode('utf-8')
         productor.send(topic, json_mensaje)
