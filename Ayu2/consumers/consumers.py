@@ -1,35 +1,30 @@
-from kafka import KafkaConsumer, TopicPartition
+from kafka import KafkaConsumer
+from itertools import zip_longest
 import random
 
 servidores_bootstrap = 'kafka:9092'
-topics = ['temperatura']
+topics = ['temperatura', 'porcentaje_humedad', 'posicion', 'color', 'peso']
 
-topic_elegido = random.choice(topics)
-grupo_consumidores = f'grupo_consumidores_{topic_elegido}'
+# Creando grupos de consumidores para cada topic
+consumer_groups = [f'grupo_consumidores_{topic}' for topic in topics]
 
-# Configurar el consumidor con el group_id
-consumer = KafkaConsumer(
-    bootstrap_servers=[servidores_bootstrap],
-    auto_offset_reset='earliest',
-    enable_auto_commit=True,
-    group_id=grupo_consumidores,
-    value_deserializer=lambda x: x.decode('utf-8')
-)
+# Creando consumidores para cada grupo
+consumers = [
+    KafkaConsumer(
+        *topics,
+        group_id=group,
+        bootstrap_servers=[servidores_bootstrap]
+    )
+    for group in consumer_groups
+]
 
-# Obtener las particiones para el topic elegido
-particiones = consumer.partitions_for_topic(topic_elegido)
+# Partition of topics
 
-# Imprimir el topic y sus particiones
-print(f"Topic: {topic_elegido}")
-for particion in particiones:
-    print(f" - Partición: {particion}")
 
-# Consumir mensajes de todas las particiones del topic elegido
-for particion in particiones:
-    tp = TopicPartition(topic_elegido, particion)
-    consumer.assign([tp])
-    for mensaje in consumer:
-        print(f"Mensaje de la partición {mensaje.partition()}: {mensaje.value}")
-
-# Cerrar el consumidor para liberar recursos
-consumer.close()
+# Crear un bucle infinito para consumir mensajes de manera alternada de cada consumidor
+while True:
+    for msgs in zip_longest(*consumers):
+        for i, msg in enumerate(msgs):
+            if msg is not None:
+                print(f"Grupo de consumidores: {consumer_groups[i]}\n")
+                print(f"Topic: {msg.topic}, Mensaje: {msg.value}")
