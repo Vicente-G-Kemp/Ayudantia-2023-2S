@@ -1,23 +1,25 @@
-from kafka import KafkaConsumer, TopicPartition
-import random
+from kafka import KafkaConsumer
+import json
 
 servidores_bootstrap = 'kafka:9092'
-topics = ['temperatura']
+topic_temperatura = 'temperatura'
+grupo_consumidores = 'grupo_consumidores_temperatura'
 
-grupo_consumidores = f'grupo_consumidores_{topics[0]}'
-
-# Configurar el consumidor con el group_id
 consumer = KafkaConsumer(
-    bootstrap_servers=[servidores_bootstrap],
+    topic_temperatura,
     group_id=grupo_consumidores,
+    bootstrap_servers=[servidores_bootstrap],
+    value_deserializer=lambda x: json.loads(x.decode('utf-8'))  # Se utiliza json.loads para deserializar el mensaje JSON
 )
 
-# Especificar la partición desde la que queremos consumir
-particion_especifica = TopicPartition(topics[0], 0)  # Selecciona la partición 0 del topic "temperatura"
-
-# Asignar la partición específica al consumidor
-consumer.assign([particion_especifica])
-
-# Consumir mensajes de la partición asignada
+# Consumir mensajes de los topics elegidos
 for msg in consumer:
-    print(f"Topic: {msg.topic}, Partición: {msg.partition}, Mensaje: {msg.value.decode('utf-8')}")
+    # Utilizamos el método get() para evitar KeyError en caso de que la clave no exista en el mensaje
+    temperatura = msg.value.get('temperatura')
+    unidad = msg.value.get('unidad')
+
+    # Verificamos si tanto la temperatura como la unidad están presentes antes de intentar imprimirlos
+    if temperatura is not None and unidad is not None:
+        print(f"Topic: {msg.topic}, Partición: {msg.partition}, Unidad: {unidad}, Temperatura: {temperatura}")
+    else:
+        print("Mensaje incompleto recibido.")
