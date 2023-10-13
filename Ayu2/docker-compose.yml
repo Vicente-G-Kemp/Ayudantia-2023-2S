@@ -33,9 +33,9 @@ services:
 
   consumer:
     build: ./consumers
-    #container_name: consumer_kafka
-    deploy: 
-      replicas: 5
+    container_name: consumer_kafka
+    #deploy: 
+    #  replicas: 5
     depends_on:
       - kafka
       - zookeeper
