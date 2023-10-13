@@ -14,8 +14,6 @@ services:
       - ./backend/client:/client
     depends_on:
       - server
-    # networks:
-    #   - app-tier
     ports:
       - "3000:3000"
 
@@ -35,7 +33,3 @@ services:
     image: memcached:latest
     ports:
         - "11211:11211"
-
-networks:
-  app-tier:
-    driver: bridge
