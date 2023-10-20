@@ -48,3 +48,30 @@ Nuevamente para la ejecución del consumer deben de colocar el siguiente comando
 ```sh
 python3 consumers2.py
 ```
+
+## *Caso3*
+Para el tercer caso se aplicó el uso de brokers, ya que se trabaja con clusters de kafka entonces se tendrían cada topic adherido con un contenedor en específico casi como un server de kafka que trabaja con varios producers a la vez. \
+Por lo que para ejecutar cada contenedor se deben de aplicar los siguientes comandos:
+```sh
+docker exec -it producer_kafka bash
+docker exec -it producer_kafka2 bash
+docker exec -it producer_kafka3 bash
+```
+Aquí deben de aplicar en cada uno de ellos el siguiente comando:\
+Para el producer dentro del primer contenedor:
+```sh
+python3 producers3.py 4 temperatura
+```
+Para el producer dentro del segundo contenedor:
+```sh
+python3 producers3.py 4 porcentaje_temperatura
+```
+Para el producer dentro del tercer contenedor:
+```sh
+python3 producers3.py 4 posicion
+```
+Para el consumer:
+```sh
+python3 consumers3.py
+```
+Y debería de aparecer en el consumer los mensajes de cada uno de los topics asociados al servidor de Kafka procedentes de cada contenedor.
