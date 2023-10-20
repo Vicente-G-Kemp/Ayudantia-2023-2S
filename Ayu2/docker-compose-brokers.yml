@@ -31,6 +31,24 @@ services:
     volumes:
       - ./producers:/usr/src/app
 
+  producer2:
+    build: ./producers
+    container_name: producer_kafka2
+    depends_on:
+      - kafka
+      - zookeeper
+    volumes:
+      - ./producers:/usr/src/app
+
+  producer3:
+    build: ./producers
+    container_name: producer_kafka3
+    depends_on:
+      - kafka
+      - zookeeper
+    volumes:
+      - ./producers:/usr/src/app
+
   consumer:
     build: ./consumers
     container_name: consumer_kafka
