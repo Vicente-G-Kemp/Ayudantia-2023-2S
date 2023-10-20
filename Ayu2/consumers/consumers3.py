@@ -2,7 +2,7 @@ from kafka import KafkaConsumer
 import random
 
 servidores_bootstrap = 'kafka:9092'
-topics = ['temperatura', 'porcentaje_humedad', 'posicion', 'color', 'peso']
+topics = ['temperatura', 'porcentaje_humedad', 'posicion']
 
 grupo_consumidores = f'grupo_consumidores_{random.choice(topics)}'
 
