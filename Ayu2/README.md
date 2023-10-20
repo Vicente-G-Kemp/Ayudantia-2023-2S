@@ -51,6 +51,10 @@ python3 consumers2.py
 
 ## *Caso3*
 Para el tercer caso se aplicó el uso de brokers, ya que se trabaja con clusters de kafka entonces se tendrían cada topic adherido con un contenedor en específico casi como un server de kafka que trabaja con varios producers a la vez. \
+Primero deben de ejecutar el docker-compose-brokers.yml para levantar la topología mediante el siguiente comando:
+```sh
+docker compose -f docker-compose-brokers.yml up --build
+```
 Por lo que para ejecutar cada contenedor se deben de aplicar los siguientes comandos:
 ```sh
 docker exec -it producer_kafka bash
@@ -64,7 +68,7 @@ python3 producers3.py 4 temperatura
 ```
 Para el producer dentro del segundo contenedor:
 ```sh
-python3 producers3.py 4 porcentaje_temperatura
+python3 producers3.py 4 porcentaje_humedad
 ```
 Para el producer dentro del tercer contenedor:
 ```sh
@@ -74,4 +78,8 @@ Para el consumer:
 ```sh
 python3 consumers3.py
 ```
-Y debería de aparecer en el consumer los mensajes de cada uno de los topics asociados al servidor de Kafka procedentes de cada contenedor.
+Y debería de aparecer en el consumer los mensajes de cada uno de los topics asociados al servidor de Kafka procedentes de cada contenedor.\
+Por último para bajar la topología deben de ejecutar el siguiente comando:
+```sh
+docker compose -f docker-compose-brokers.yml down -v
+```
