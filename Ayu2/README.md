@@ -83,3 +83,18 @@ Por último para bajar la topología deben de ejecutar el siguiente comando:
 ```sh
 docker compose -f docker-compose-brokers.yml down -v
 ```
+
+## *Ejemplo Conexión DB*
+Para realizar pruebas de conexión a DB se dejó un ejemplo con postgresql, de igual forma pueden hacer lo mismo con cualquier otra base detaos de su gusto. Cabe recalcar que esta es una app de prueba, tendrán que por su parte hacer los cambios pertinenetes que se aomoden a lo solicitado en su tarea.\
+Para levantar la topología deben de colocar el siguiente comando:
+```sh
+docker compose -f docker-compose-db.yml up --build
+```
+Luego tienen que entrar al servicio pertinente de example-app, mediante el siguiente comando:
+```sh
+docker exec -it example-app bash
+```
+Luego tienen que ejecutar el siguiente comando para que imprima una simple query por consola desde el archivo main.py
+```sh
+python3 main.py
+```
