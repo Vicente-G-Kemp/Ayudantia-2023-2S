@@ -105,5 +105,26 @@ Deben de entrar al siguiente dominio desde su ordenador
 ```sh
 lohalhost:81
 ```
-Ahí tendrán una interfaz de login de usuario las credenciales se encuentran en el compose
-O también pueden utilizar la misma bash para establecer dicha conexión
+Ahí tendrán una interfaz de login de usuario las credenciales se encuentran en el compose.\
+Luego Tendrán que dar click derecho en servers, dan click en Register y luego en Server. Posterior a ello se abrirá una ventana en donde tendrán que colocar:\
+
+*General*:
+- Name: db
+
+*Connection*:
+- Host name/address: db
+- Maintenance database: proyecto
+- Username: postgres
+- Password: postgres
+- Dan click en Save y sha esta.
+
+O también pueden utilizar la misma bash para establecer la conexión mediante los siguiente comandos:\
+En otra bash o desde docker desktop entran al servicio, en caso que usen la bash pueden aplicar simplemente la siguiente instrucción:
+```sh
+docker exec -it db bash
+```
+Luego de estar dentro del servicio aplicar el siguiente comando:
+```sh
+psql -d proyecto -U postgres
+```
+Y ya con eso deberían de estar conectados a su respectiva db.
