@@ -5,6 +5,6 @@ def init_db():
         dbname='proyecto',
         user='postgres',
         password='postgres',
-        host='postgres',
+        host='db',
     )
     return conn
