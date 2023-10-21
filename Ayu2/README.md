@@ -98,3 +98,12 @@ Luego tienen que ejecutar el siguiente comando para que imprima una simple query
 ```sh
 python3 main.py
 ```
+## *Configuración DB*
+Para todo lo que es configuración de la db pueden cambiar el archivo init.sql que se encuentra en la carpeta db.\
+Ahora bien si quieren interactura directamente con el servicio de postgres, pueden hacerlo a travez de la interfaz de pgadmin \
+Deben de entrar al siguiente dominio desde su ordenador
+```sh
+lohalhost:81
+```
+Ahí tendrán una interfaz de login de usuario las credenciales se encuentran en el compose
+O también pueden utilizar la misma bash para establecer dicha conexión
