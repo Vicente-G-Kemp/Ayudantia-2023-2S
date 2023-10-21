@@ -4,7 +4,11 @@ version: '3.4'
 services:
 
 #################-example-app-#####################
-
+  example-app:
+    build: ./db-example-app
+    container_name: example-app
+    volumes:
+      - ./db-example-app:/usr/src/app
 
 ###################-POSTGRESQL-##########################
   db:
