@@ -50,4 +50,4 @@ def enviar_temperatura():
 if __name__ == "__main__":
     enviar_temperatura()
 
-# Ocupar el siguiente comando para crear los topics dentro de kafka: kafka-topics.sh --alter --bootstrap-server kafka:9092 --partitions 3 --topic temperatura
+# Ocupar el siguiente comando para crear las particiones dentro de un topic dentro de kafka: kafka-topics.sh --alter --bootstrap-server kafka:9092 --partitions 3 --topic temperatura
