@@ -12,6 +12,9 @@ RUN apt-get update -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Instalación de paquetes de Python necesarios
+RUN pip3 install requests
+
 # Configuración del usuario hduser y configuraciones relacionadas con sudo
 RUN useradd -m hduser \
     && echo "hduser:supergroup" | chpasswd \
