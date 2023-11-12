@@ -3,23 +3,15 @@ version: '3.8'
 services:
   hadoop:
     container_name: hadoop
-    build: .
+    build:
+      context: ./Hadoop/
+      dockerfile: Dockerfile
     restart: always
-    # volumes:
-    #   - ./Hadoop3/examples:/home/hduser/examples
+    volumes:
+      - ./Hadoop/examples:/home/hduser/examples
     ports:
       - 9864:9864
       - 9870:9870
       - 8088:8088
       - 9000:9000
       - 8020:8020
-
-  # buscador:
-  #   container_name: buscador
-  #   build: ./Buscador/
-  #   volumes:
-  #     - ./Buscador:/app
-  #   ports:
-  #     - 8000:8001
-  #   depends_on:
-  #     - hadoop

@@ -25,10 +25,10 @@ for entrada in entradas:
     texto = '{}<splittername>{}'.format(i, json.dumps(texto))
 
     if i <= 5:
-        with open(f'./carpeta1/{entrada}.txt', 'w') as f:
+        with open(f'../carpeta1/{entrada}.txt', 'w') as f:
             f.write(texto)
     else:
-        with open(f'./carpeta2/{entrada}.txt', 'w') as f:
+        with open(f'../carpeta2/{entrada}.txt', 'w') as f:
             f.write(texto)
     i = i + 1
 
