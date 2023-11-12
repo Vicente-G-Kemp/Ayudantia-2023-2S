@@ -1,7 +1,18 @@
 import requests
 import json
 
-entradas = ["mazda", "nissan", "toyota","mitsubishi","suzuki", "bentley", "ferrari", "lamborghini", "lotus", "bugatti"]
+entradas = [
+    "mazda", 
+    "nissan", 
+    "toyota",
+    "mitsubishi",
+    "suzuki", 
+    "bentley", 
+    "ferrari", 
+    "lamborghini",
+    "lotus", 
+    "bugatti"
+]
 url = "https://en.wikipedia.org/w/api.php"
 i = 1
 for entrada in entradas:
