@@ -79,4 +79,5 @@ Es aquí donde entra el uso del volumen para así extraer de forma efectiva el a
 hdfs dfs -get /user/hduser/hduser/outhadoop/ /home/hduser/examples
 ```
 
-Con lo anterior ya estarían listos con la respectiva aplicación.
+Con lo anterior ya estarían listos con la respectiva aplicación (revisen la carpeta outputdoop y fijense en el archivo part-00000). \
+Allí verán que saldrá una columna que representa el número de documento y también otra que representa la frecuencia o la cantidad de veces que pueden encontrar dicha palabra en el .txt procesado, cabe recalcar que es un archivo que volcará todas las palabras de los 10 archivos contenidos en ambas carpetas.
