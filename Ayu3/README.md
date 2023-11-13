@@ -27,7 +27,7 @@ docker volume rm $(docker volume ls -q)
 ```
 
 ---
-## Tutorial Hadoop
+## *Tutorial Hadoop*
 
 Primero que todo ya deben de tener la topología levantada. Posterior de ello deben de visualizar los respectivo directorios con los cuales van a trabajar vendrían a ser examples y buscador. \
 \
@@ -39,4 +39,44 @@ Ahora  lo para trabajar con hadoop usaremos comandos basicos dentro de su repert
 \
 Posterior a lo anterior deben de configurar un usuario que administrará todos los comandos y por ello es necesario que sigan las siguientes instrucciones y/o comandos:
 
-**[1]** Se creará un respectivo directorio para gestionar las acciones del usuario hduser (es imporatnte que tenga este nombre para todos los comandos):
+**[1]** Se creará un respectivo directorio para gestionar las acciones del usuario hduser (es imporatnte que tenga este nombre para todos los comandos)\
+Creación de carpeta para usuario:
+```sh
+hdfs dfs -mkdir /user
+```
+Creación de usuario en el directorio:
+```sh
+hdfs dfs -mkdir /user/hduser
+```
+Creación de directorio para el procesamiento archivos y/o textos:
+```sh
+hdfs dfs -mkdir input
+```
+**[2]** Damos los permisos tantos del usuario y del directorio
+```sh
+sudo chown -R hduser .
+```
+**[3]** Cargamos los txt extraidos de wikipedia a hadoop mediante los siguientes comandos, primero accedemos ala carpeta donde estan alojados y posterior se ejecuta hdfs.
+```sh
+cd examples/
+hdfs dfs -put carpeta1/*.txt input
+hdfs dfs -put carpeta2/*.txt input
+```
+Se puede validar que efectivamente se hayan procesado dichos archivos contenidos en los direcotior con el siguiente comando:
+```sh
+hdfs dfs -ls input
+```
+Con eso ya deberían de tener un seguimiento de los arhicovs traspasados aldirectorio input dentro administrador de archivos de Hadoop.
+
+**[4]** Se jecutan tanto mapper y reducer puesto que hadoop trabaja con ambas.
+```sh
+mapred streaming -files mapper.py,reducer.py -input /user/hduser/input/*.txt -output hduser/outhadoop/ -mapper ./mapper.py -reducer ./reducer.py
+```
+Luego el archivo lo exportamos al entorno local en linux dentro del contenedor y en este caso dentro del directorio examples. Allí quedará una carpeta de nombre output con un contador de palabras por arhivo y en este caso sería uno general para todos los datos volcados tanto en la *carpeta1* como en la *carpeta2*. 
+
+Es aquí donde entra el uso del volumen para así extraer de forma efectiva el archivo ya procesado, por hadoop.
+```sh
+hdfs dfs -get /user/hduser/hduser/outhadoop/ /home/hduser/examples
+```
+
+Con lo anterior ya estarían listos con la respectiva aplicación.
