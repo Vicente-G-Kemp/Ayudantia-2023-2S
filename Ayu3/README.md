@@ -60,23 +60,23 @@ hdfs dfs -mkdir input
 ```sh
 sudo chown -R hduser .
 ```
-**[3]** Cargamos los txt extraidos de wikipedia a hadoop mediante los siguientes comandos, primero accedemos ala carpeta donde estan alojados y posterior se ejecuta hdfs.
+**[3]** Cargamos los txt extraidos de wikipedia a hadoop mediante los siguientes comandos, primero accedemos a la carpeta donde estan alojados y se ejecuta hdfs.
 ```sh
 cd examples/
 hdfs dfs -put carpeta1/*.txt input
 hdfs dfs -put carpeta2/*.txt input
 ```
-Se puede validar que efectivamente se hayan procesado dichos archivos contenidos en los direcotior con el siguiente comando:
+Se puede validar que efectivamente se hayan procesado dichos archivos contenidos en los directorios con el siguiente comando:
 ```sh
 hdfs dfs -ls input
 ```
 Con eso ya deberían de tener un seguimiento de los arhicovs traspasados al directorio input dentro administrador de archivos de Hadoop.
 
-**[4]** Se jecutan tanto mapper y reducer puesto que hadoop trabaja con ambas.
+**[4]** Se ejecutan tanto mapper y reducer puesto que hadoop trabaja con ambas.
 ```sh
 mapred streaming -files mapper.py,reducer.py -input /user/hduser/input/*.txt -output hduser/outhadoop/ -mapper ./mapper.py -reducer ./reducer.py
 ```
-Luego el archivo lo exportamos al entorno local en linux dentro del contenedor y en este caso dentro del directorio examples. Allí quedará una carpeta de nombre output con un contador de palabras por arhivo y en este caso sería uno general para todos los datos volcados tanto en la *carpeta1* como en la *carpeta2*. 
+Luego el archivo lo exportamos al entorno local en linux dentro del contenedor y en este caso dentro del directorio examples. Allí quedará una carpeta de nombre output con un contador de palabras por archivo y en este caso sería uno general para todos los datos volcados tanto en la *carpeta1* como en la *carpeta2*. 
 
 Es aquí donde entra el uso del volumen para así extraer de forma efectiva el archivo ya procesado, por hadoop.
 ```sh
