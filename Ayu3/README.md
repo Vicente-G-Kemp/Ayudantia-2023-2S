@@ -66,7 +66,7 @@ Se puede validar que efectivamente se hayan procesado dichos archivos contenidos
 ```sh
 hdfs dfs -ls input
 ```
-Con eso ya deberían de tener un seguimiento de los arhicovs traspasados aldirectorio input dentro administrador de archivos de Hadoop.
+Con eso ya deberían de tener un seguimiento de los arhicovs traspasados al directorio input dentro administrador de archivos de Hadoop.
 
 **[4]** Se jecutan tanto mapper y reducer puesto que hadoop trabaja con ambas.
 ```sh
