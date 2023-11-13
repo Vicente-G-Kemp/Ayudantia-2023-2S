@@ -39,7 +39,7 @@ Ahora  lo para trabajar con hadoop usaremos comandos basicos dentro de su repert
 \
 Posterior a lo anterior deben de configurar un usuario que administrará todos los comandos y por ello es necesario que sigan las siguientes instrucciones y/o comandos:
 
-**[0]** Se al contenedor que contiene el servicio de hadoop:
+**[0]** Se accede al contenedor que contiene el servicio de hadoop:
 ```sh
 docker exec -it hadoop bash
 ```
