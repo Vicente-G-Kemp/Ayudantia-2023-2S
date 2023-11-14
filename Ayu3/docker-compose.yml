@@ -9,7 +9,7 @@ services:
     restart: always
     volumes:
       - ./Hadoop/examples:/home/hduser/examples
-      - ./Hadoop/buscador:/home/hduser/buscador
+      #- ./Hadoop/buscador:/home/hduser/buscador
     ports:
       - 9864:9864
       - 9870:9870
