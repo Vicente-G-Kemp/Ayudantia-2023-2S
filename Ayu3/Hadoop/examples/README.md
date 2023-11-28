@@ -2,6 +2,9 @@
 ```sh
 pip install mrjob
 ```
+# OJOOO
+## Utilizar wikiSeeker.py no wikigrabber.py, porfavor creeme.
+### WikiSeeker >>
 - ⠀⠀⠀⠀⠀⡴⣿⣙⢳⣶⣦⡀⠀⠀⠀⠀⣰⢶⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⣠⣾⠵⡿⠉⠻⣿⣿⠧⠀⠀⠀⢰⣧⣤⡈⢉⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⢠⣤⣤⣤⣄⡀⠀⠀⠀
 ⠀⢠⣾⡟⠁⢐⡇⠀⠀⠀⠀⠀⠀⠀⠀⣯⡍⠁⢡⠔⣿⣾⣿⡿⠀⠀⠀⠀⠀⠀⢿⣷⣿⣷⣶⡟⡆⠀⠀
